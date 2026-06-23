@@ -3975,6 +3975,33 @@
     "website": "",
     "address": "",
     "data_source": "JustDial",
+    "data_complete": 1
+  },
+  "Yashwantrao Chavan 60/1 Boys": {
+    "school_name": "Yashwantrao Chavan 60/1 Boys",
+    "phone": "8888888888",
+    "email": "",
+    "website": "",
+    "address": "",
+    "data_source": "JustDial",
+    "data_complete": 1
+  },
+  "Yashwantrao Chavan 60/1 Girls": {
+    "school_name": "Yashwantrao Chavan 60/1 Girls",
+    "phone": "8888888888",
+    "email": "",
+    "website": "",
+    "address": "",
+    "data_source": "JustDial",
+    "data_complete": 1
+  },
+  "Yashwantrao Chavan Urdu": {
+    "school_name": "Yashwantrao Chavan Urdu",
+    "phone": "8888888888",
+    "email": "",
+    "website": "",
+    "address": "",
+    "data_source": "JustDial",
     "data_complete": 0
   }
 }
