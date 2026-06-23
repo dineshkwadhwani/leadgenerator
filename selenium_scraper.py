@@ -235,13 +235,19 @@ class SeleniumSchoolScraper:
         
         return result
     
-    def search_school(self, school_name, city='Pune'):
+    def search_school(self, school_name, city='Pune', item_num=None, total=None):
         """Search school using multiple browser-based methods"""
-        logger.info(f"Processing: {school_name}")
+        if item_num and total:
+            logger.info(f"[{item_num}/{total}] Processing: {school_name}")
+        else:
+            logger.info(f"Processing: {school_name}")
         
         # Check if already processed
         if school_name in self.progress:
-            logger.info(f"  (cached) {school_name}")
+            if item_num and total:
+                logger.info(f"[{item_num}/{total}] (cached) {school_name}")
+            else:
+                logger.info(f"  (cached) {school_name}")
             return self.progress[school_name]
         
         result = {
@@ -264,7 +270,10 @@ class SeleniumSchoolScraper:
                 result['address'] = maps_result['address']
                 result['data_source'] = maps_result['source']
                 self.found_count += 1
-                logger.info(f"✓ Found on {maps_result['source']}")
+                if item_num and total:
+                    logger.info(f"[{item_num}/{total}] ✓ Found on {maps_result['source']}")
+                else:
+                    logger.info(f"✓ Found on {maps_result['source']}")
                 
                 # Save progress
                 self.progress[school_name] = result
@@ -282,7 +291,10 @@ class SeleniumSchoolScraper:
                 result['address'] = jd_result['address']
                 result['data_source'] = jd_result['source']
                 self.found_count += 1
-                logger.info(f"✓ Found on {jd_result['source']}")
+                if item_num and total:
+                    logger.info(f"[{item_num}/{total}] ✓ Found on {jd_result['source']}")
+                else:
+                    logger.info(f"✓ Found on {jd_result['source']}")
                 
                 # Save progress
                 self.progress[school_name] = result
@@ -300,7 +312,10 @@ class SeleniumSchoolScraper:
                 result['address'] = google_result['address']
                 result['data_source'] = google_result['source']
                 self.found_count += 1
-                logger.info(f"✓ Found on {google_result['source']}")
+                if item_num and total:
+                    logger.info(f"[{item_num}/{total}] ✓ Found on {google_result['source']}")
+                else:
+                    logger.info(f"✓ Found on {google_result['source']}")
                 
                 # Save progress
                 self.progress[school_name] = result
@@ -311,7 +326,10 @@ class SeleniumSchoolScraper:
             logger.error(f"Error processing {school_name}: {str(e)}")
         
         self.failed_count += 1
-        logger.info(f"✗ Not found: {school_name}")
+        if item_num and total:
+            logger.info(f"[{item_num}/{total}] ✗ Not found: {school_name}")
+        else:
+            logger.info(f"✗ Not found: {school_name}")
         
         # Save progress
         self.progress[school_name] = result
@@ -321,11 +339,10 @@ class SeleniumSchoolScraper:
     def process_schools(self, school_names, city='Pune'):
         """Process schools one by one"""
         results = []
+        total = len(school_names)
         
-        for idx, school_name in enumerate(school_names):
-            logger.info(f"\n[{idx+1}/{len(school_names)}] Processing...")
-            
-            result = self.search_school(school_name, city)
+        for idx, school_name in enumerate(school_names, 1):
+            result = self.search_school(school_name, city, item_num=idx, total=total)
             results.append(result)
             
             # Calculate completeness
