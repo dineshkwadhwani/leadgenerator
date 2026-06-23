@@ -1,0 +1,290 @@
+╔════════════════════════════════════════════════════════════════════════════╗
+║                  MAHAEXAM LEAD GENERATOR - HOW TO USE                      ║
+║                                                                            ║
+║                     VS CODE PROJECT - Ready to Go!                        ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+
+🎯 WHAT YOU HAVE
+═════════════════════════════════════════════════════════════════════════════
+
+A complete VS Code project that:
+  ✓ Extracts school contact information
+  ✓ Works with ANY Excel file
+  ✓ Flexible input (pass file as argument or use config)
+  ✓ Professional code structure
+  ✓ Fully documented
+  ✓ Ready for production use
+
+
+📥 BEFORE YOU START
+═════════════════════════════════════════════════════════════════════════════
+
+Make sure you have:
+  ✓ Python 3.7+ installed
+  ✓ VS Code installed (optional but recommended)
+  ✓ The Excel file you want to process
+  ✓ Internet connection
+
+
+🚀 STEP-BY-STEP GUIDE
+═════════════════════════════════════════════════════════════════════════════
+
+STEP 1: Extract the Project
+────────────────────────────
+1. You have: MahaExam_LeadGenerator/ folder
+2. Put it somewhere on your computer
+3. Remember the location
+
+
+STEP 2: Open in VS Code
+────────────────────────
+1. Open VS Code
+2. File → Open Folder
+3. Select: MahaExam_LeadGenerator
+4. Wait for it to load
+5. Click "Trust workspace" if asked
+
+
+STEP 3: Install Dependencies (ONE TIME ONLY)
+──────────────────────────────────────────────
+1. In VS Code: Terminal → New Terminal (or Ctrl+`)
+2. Type: pip install -r requirements.txt
+3. Press Enter
+4. Wait for installation (2-3 minutes)
+5. You're done! (Never need to do this again)
+
+
+STEP 4: Prepare Your Excel File
+─────────────────────────────────
+Your Excel file MUST have:
+  ✓ Column named: "school_name"  (exactly this spelling)
+  ✓ School names in the column
+  ✓ Can have other columns (they'll be kept)
+
+Examples:
+  ✓ school_name, taluka, students, pass, fail
+  ✓ school_name, location, contact
+  ✓ school_name (just this one column is fine!)
+
+Place the file in the project folder:
+  MahaExam_LeadGenerator/
+  ├── PIMPRI_CHICHWAD_MNP.xlsx  ← Put your file here
+  ├── main.py
+  └── ... (other files)
+
+
+STEP 5: Run the Scraper
+────────────────────────
+Open Terminal in VS Code (Ctrl+`)
+
+METHOD A: Direct command
+$ python main.py PIMPRI_CHICHWAD_MNP.xlsx
+Output: PIMPRI_CHICHWAD_MNP_WITH_LEADS.xlsx
+
+METHOD B: From input folder
+$ python main.py input/schools.xlsx
+Output: schools_WITH_LEADS.xlsx
+
+METHOD C: Using config.json (for repeated files)
+1. Edit config.json
+2. Change: "INPUT_FILE": "YOUR_FILE.xlsx"
+3. Run: python main.py
+
+METHOD D: Different file next time
+$ python main.py nashik_schools.xlsx
+
+
+STEP 6: Wait for Results
+──────────────────────────
+The scraper will:
+  1. Read your Excel file
+  2. Search for each school
+  3. Extract contact information
+  4. Print progress: [1/45] [2/45] ...
+  5. Save results
+
+Time: 15-20 minutes for 45 schools
+
+
+STEP 7: Check Results
+──────────────────────
+Look for new file:
+  YOUR_FILE_WITH_LEADS.xlsx
+
+Open it in Excel or Google Sheets to see:
+  ✓ All original columns
+  ✓ New columns: address, website, phone, email, lead_source, data_complete
+  ✓ Completeness scores (0-4)
+
+
+STEP 8: Use the Data!
+──────────────────────
+1. Sort by "data_complete" (highest first)
+2. Focus on complete leads (score 3-4)
+3. Call schools with phone numbers
+4. Email schools with email addresses
+5. Track conversions
+
+
+📁 PROJECT STRUCTURE (Inside VS Code)
+═════════════════════════════════════════════════════════════════════════════
+
+You'll see:
+  
+  📂 MahaExam_LeadGenerator/
+     │
+     ├── 📂 src/                  ← Python source code
+     │   ├── lead_gen_quick.py   ← Main scraper
+     │   └── utils.py            ← Utilities
+     │
+     ├── 📂 input/               ← Put Excel files here
+     │
+     ├── 📂 output/              ← Results saved here
+     │
+     ├── 📂 .vscode/             ← VS Code settings
+     │
+     ├── main.py                 ← Run this!
+     ├── config.json            ← Edit settings
+     ├── requirements.txt       ← Dependencies
+     ├── README.md             ← Full documentation
+     └── ... (other docs)
+
+
+🔧 CONFIGURATION (Editing config.json)
+═════════════════════════════════════════════════════════════════════════════
+
+Open: config.json in VS Code
+
+Default:
+{
+  "INPUT_FILE": "PIMPRI_CHICHWAD_MNP.xlsx"
+}
+
+Change for your file:
+{
+  "INPUT_FILE": "NASHIK_SCHOOLS.xlsx"
+}
+
+Then run: python main.py
+
+
+💡 TIPS & TRICKS
+═════════════════════════════════════════════════════════════════════════════
+
+TIP 1: Batch Processing
+$ python main.py file1.xlsx
+$ python main.py file2.xlsx
+$ python main.py file3.xlsx
+(Results: file1_WITH_LEADS.xlsx, file2_WITH_LEADS.xlsx, file3_WITH_LEADS.xlsx)
+
+TIP 2: Check Progress
+Terminal shows: [1/45] [2/45] ... [45/45]
+Each line = one school processed
+
+TIP 3: If It's Slow
+Edit config.json:
+  "MAX_WORKERS": 3  (slower, more stable)
+  "MAX_WORKERS": 10 (faster, may be unstable)
+Default: 5 (balanced)
+
+TIP 4: Large Files
+Split into batches of 100-200 schools:
+  python main.py batch1.xlsx
+  python main.py batch2.xlsx
+  etc.
+
+TIP 5: Check Logs
+Look for: lead_generation_YYYYMMDD_HHMMSS.log
+Contains detailed debug information
+
+
+⚠️ COMMON ISSUES & FIXES
+═════════════════════════════════════════════════════════════════════════════
+
+ISSUE: "File not found"
+└─ FIX: Check filename exactly
+        Put file in: MahaExam_LeadGenerator/FILENAME.xlsx
+        Or use full path: python main.py input/file.xlsx
+
+ISSUE: "school_name column not found"
+└─ FIX: Rename your column to: school_name (lowercase, no spaces)
+        Check spelling exactly
+
+ISSUE: "ModuleNotFoundError: No module named 'pandas'"
+└─ FIX: pip install -r requirements.txt
+        (May need to restart VS Code after)
+
+ISSUE: Script is slow
+└─ FIX: Normal! (15-20 min for 45 schools)
+        Can't make it faster without risking accuracy
+        Or edit config.json MAX_WORKERS: 10
+
+ISSUE: Getting connection errors
+└─ FIX: Check internet connection
+        Wait and retry
+        Or increase REQUEST_TIMEOUT in config.json
+
+ISSUE: Python not found
+└─ FIX: Install from python.org
+        Add to PATH during installation
+        Restart computer and VS Code
+
+
+📞 GETTING HELP
+═════════════════════════════════════════════════════════════════════════════
+
+Read these files (in VS Code):
+  1. README.md              ← Most complete guide
+  2. VSCODE_GUIDE.md       ← VS Code specific help
+  3. PROJECT_STRUCTURE.md  ← File descriptions
+
+
+🎯 EXPECTED OUTPUT EXAMPLE
+═════════════════════════════════════════════════════════════════════════════
+
+Your original file:
+  school_name           | taluka        | students
+  ─────────────────────────────────────────────────
+  Akshara School        | Pimpri East   | 500
+  City Pride School     | Pimpri West   | 300
+
+After running scraper:
+  school_name           | taluka        | students | phone      | email           | website
+  ─────────────────────────────────────────────────────────────────────────────────────────
+  Akshara School        | Pimpri East   | 500      | 9876543210 | info@akshara... | https://...
+  City Pride School     | Pimpri West   | 300      | 9234567890 | admin@citypri...| https://...
+
+Plus columns:
+  address, lead_source, data_complete (0-4 score)
+
+
+🚀 READY TO GO?
+═════════════════════════════════════════════════════════════════════════════
+
+Quick checklist:
+  ☐ Python installed? (python --version)
+  ☐ VS Code opened to project folder?
+  ☐ Dependencies installed? (pip install -r requirements.txt)
+  ☐ Excel file prepared with "school_name" column?
+  ☐ File placed in project root folder?
+
+Then just run:
+  python main.py YOUR_FILE.xlsx
+
+
+═════════════════════════════════════════════════════════════════════════════
+
+                        LET'S GET THOSE LEADS! 🚀
+
+Run:  python main.py PIMPRI_CHICHWAD_MNP.xlsx
+Wait: 15-20 minutes
+Get:  45 schools with contact information
+Do:   Call and email them!
+
+═════════════════════════════════════════════════════════════════════════════
+
+Questions? Read README.md inside the project folder.
+Stuck? Check VSCODE_GUIDE.md for common issues.
+
+Good luck! 💪

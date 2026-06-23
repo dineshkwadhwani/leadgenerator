@@ -1,0 +1,7 @@
+{
+  "INPUT_FILE": "PIMPRI CHICHWAD MNP.xlsx",
+  "MAX_WORKERS": 5,
+  "REQUEST_TIMEOUT": 15,
+  "VERBOSE": true,
+  "NOTES": "Change INPUT_FILE to your Excel file name. File must have 'school_name' column."
+}
